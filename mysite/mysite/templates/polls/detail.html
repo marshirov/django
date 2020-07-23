@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}{{selected_question.question_text}}{% endblock%}
+
+{% block content %}
+
+<h2>{{selected_question.question_text}}</h2>
+<p>{{selected_question.pub_date}}</p>
+<hr>
+{% if latest_choice_text %}
+   {% for b in latest_choice_text %}
+       <p>{{ b }}</p>
+   {% endfor %}
+
+   {% for b in latest_choice %}
+       <p>{{ b.choice_text }}  {{ b.votes }}</p>
+   {% endfor %}
+
+
+
+{% else %}
+Комментарии не найдены
+{% endif %}
+<hr>
+
+<form action = "{% url 'polls:leave_comment' selected_question.id %}" method-"GET">
+    {% csrf_token%}
+    <input type="text" required placeholder="Выбор текста" name='choice_text'><br>
+    <input type="text" required placeholder="Количество голосов" name='votes'><br>
+    <button type="submit">Отправить</button>
+</form>
+{% endblock%}
+
+

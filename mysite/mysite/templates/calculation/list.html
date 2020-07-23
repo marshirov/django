@@ -1,0 +1,8 @@
+{% block content %}
+Содержание тела
+{% for key, value  in calc_dict.items %}
+    {{ key }},
+    {{ value }}
+
+{% endfor %}
+{% endblock%}
